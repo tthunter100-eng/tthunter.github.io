@@ -326,7 +326,7 @@ loginPage.innerHTML = `
         <div style="display: flex; align-items: center; justify-items: flex-end: width: 100%; gap: 10px;">
             <label for="admin-user">USERNAME:</label>
             <input type="text" style="background-color: #d9d9d9; border-radius: 20px; border-width: 0px; height: 25px; width: 180px; padding: 3px 10px; align-items: center; justify-content: center;" id="admin-username" required>
-        </div>iv style="position: fixed; border
+        </div>
         <div style="display: flex; align-items: center; justify-items: flex-end: width: 100%; gap: 10px;">
             <label for="admin-password">PASSWORD:</label>
             <input type="password" style="background-color: #d9d9d9; border-radius: 20px; border-width: 0px; height: 25px; width: 180px; padding: 3px 10px; align-items: center; justify-content: center;" id="admin-password" required>
@@ -426,7 +426,7 @@ ticketPage.innerHTML = `
                 <input type="text" id="ItemLoc" style="margin-top: 5px; background-color: #d9d9d9; border-radius: 20px; border-width: 0px; height: 25px; width: 90%; padding: 3px 10px;" required>
             </label>
             
-            <button type="submit" id="submit-ticket" style="background-color: #0668c0; color: white; border: none; padding: 10px; border-radius: 20px; cursor: pointer; width: 120px; margin-top: 10px;">Submit Item</button>
+            <button type="submit" id="submit-ticket" style="background-color: #0668c0; color: white; border-radius: 20px; height: 50px; width: 150px; padding: 3px 10px; align-items: center; justify-content: center; color: white; border-color: #0668c0; cursor: pointer; transition: background 0.2s ease; font-size: 17px;">Submit Ticket</button>
         </form>
     </div>
 
