@@ -877,13 +877,15 @@ ticketOut.onmouseleave = () => {
 
 // Sidebar shiiiii
 const sidebarTrigger = document.createElement("div");
-sidebarTrigger.style.position = "fixed";
-sidebarTrigger.style.left = "0";
-sidebarTrigger.style.top = "0";
-sidebarTrigger.style.width = "10px";
-sidebarTrigger.style.height = "100%";
-sidebarTrigger.style.backgroundColor = "transparent";
-sidebarTrigger.style.zIndex = "1999";
+Object.assign(sidebarTrigger.style, {
+    position: fixed,
+    left : 0,
+    top: "0",
+    width: "10px",
+    height: "100%",
+    backgroundColor: "transparent",
+    zIndex: "1999",
+});
 document.body.appendChild(sidebarTrigger);
 
 const sidebar = document.createElement("div");
@@ -918,6 +920,7 @@ sidebar.addEventListener("mouseleave", () => {
         sidebar.style.left = "-700px";
     }, 300);
 });
+
 
 
 
