@@ -23,13 +23,29 @@ Object.assign(searchButton.style, {
     margin:"0",
     borderRadius:"8px",
     boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)",
-    display: "flex",
+    display: "none", //tago muna wait lang
     alignItems: "center",
     justifyContent: "center"
 });
 document.querySelector(".item-list-container").appendChild(searchButton);
 
-
+//submit a ticket div
+const lostSomething = document.createElement("div");
+lostSomething.innerHTML = `
+<h style="font-size: 38px; font-weight: bold; margin: 0; line-height: 1;">Lost Something?<br>We Got You.</h><br>
+<h style="font-size: 17px; font-weight: normal; margin: 0; line-height: 1.1;">Browse surrendered items and claim what's yours.</h><br>
+<div style="height: 50px; width: 200px; top: 20px; display: flex; position: relative;">
+    <button class="create-ticket-btn" id="ticket-button">Submit a ticket</button>
+</div>
+`;
+Object.assign(lostSomething.style, {
+    position: "absolute",
+    top: "130px",
+    left: "80px",
+    display: "flex",
+    flexDirection: "column",
+})
+document.querySelector(".header").appendChild(lostSomething);
 //search button pop-up
 const searchContainer = document.createElement("div");
 searchContainer.innerHTML = `
@@ -53,7 +69,7 @@ Object.assign(searchContainer.style, {
     position: "absolute",
     top: "-55px",
     left: "85px",
-    display: "flex",
+    display: "display",
     opacity: "0",
     transform: "translateX(-20px)",
     transition: "all 0.1s ease-out",
@@ -475,7 +491,6 @@ dropdownPopup.innerHTML = `
 <div style="display: flex; flex-direction: column; gap: 0px; width: 100%;">
     <div class="header-buttons">
         <img class="button-icon" src="Ticket.png">
-        <button class="create-ticket-btn" id="ticket-button">Submit Ticket</button>
     </div>
     <div class="button-line"></div>
     <div class="header-buttons">
