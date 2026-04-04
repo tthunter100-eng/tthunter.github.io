@@ -1,4 +1,4 @@
-//search button
+    //search button
 const searchButton = document.createElement("button");
 const searchIcon = document.createElement("img");
 searchIcon.src = "SearchIco.png";
@@ -21,7 +21,7 @@ Object.assign(searchButton.style, {
     top:"-60px",
     left:"5px",
     margin:"0",
-    borderRadius:"8px",
+    borderRadius:"8px", 
     boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)",
     display: "none", //tago muna wait lang
     alignItems: "center",
@@ -32,9 +32,9 @@ document.querySelector(".item-list-container").appendChild(searchButton);
 //submit a ticket div
 const lostSomething = document.createElement("div");
 lostSomething.innerHTML = `
-<h style="font-size: 38px; font-weight: bold; margin: 0; line-height: 1;">Lost Something?<br>We Got You.</h><br>
-<h style="font-size: 17px; font-weight: normal; margin: 0; line-height: 1.1;">Browse surrendered items and claim what's yours.</h><br>
-<div style="height: 50px; width: 200px; top: 20px; display: flex; position: relative;">
+<h style="font-size: 50px; font-weight: bold; margin: 0; line-height: 1;">Lost Something?<br>We Got You.</h><br>
+<h style="font-size: 20px; font-weight: normal; margin: 0; line-height: 1.1;">Browse surrendered items and claim what's yours.</h><br>
+<div style="height: 50px; width: 200px; top: 25px; display: flex; position: relative;">
     <button class="create-ticket-btn" id="ticket-button" style="display: flex; flex-direction: row; padding: 5px 15px; gap: 5px; align-items: center;">
     <img src="submitticket.png" style="position: relative; height: 95%; width: 20%;" alt="icon" class="submit-ticket-icon">
     <span>Submit a ticket</span>
@@ -43,7 +43,7 @@ lostSomething.innerHTML = `
 `;
 Object.assign(lostSomething.style, {
     position: "absolute",
-    top: "130px",
+    top: "140px",
     left: "80px",
     display: "flex",
     flexDirection: "column",
@@ -481,7 +481,7 @@ Object.assign(dropdown.style, {
     cursor: "pointer",
     borderWidth: "0px",
     fontSize: "30px",
-    display: "flex",
+    display: "none", //hide muna natin toh
     position: "absolute",
     alignContent: "center",
     right: "40px",
@@ -627,7 +627,7 @@ window.addEventListener('keydown', event => {
     }
 });
 
-//flavor
+//flavor we might delete this
 const wholeButton = dropdownPopup.querySelectorAll(".header-buttons");
 wholeButton.forEach(container => {
     const btn = container.querySelector("button");
