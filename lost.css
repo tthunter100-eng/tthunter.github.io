@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'DM Sans', sans-serif;
     color: #333;
     background-color: black;
     position: relative;
@@ -78,48 +78,6 @@ body::before {
     font-weight: bold;
     margin: 0;
     line-height: 1.1;
-}
-
-.button-line {
-    border-top: 2px solid rgb(167, 167, 167);
-    margin: 8px 0;
-}
-
-
-.button-icon {
-    position: absolute;
-    left: 0px;
-    width: 40px;
-    top: 0px;
-    pointer-events: none;
-    transition: filter 0.2s ease;
-}
-
-
-.header-buttons {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-
-
-
-.header-buttons button {
-    flex-grow: 1;
-    padding-left: 45px;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: left;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.1s ease;
 }
 
 
