@@ -206,6 +206,9 @@ body::before {
     margin: 0;
     box-sizing: border-box;
     display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 
@@ -215,7 +218,7 @@ body::before {
 .item-list {
     list-style: none;
     display: grid;
-    padding: 75px 20px 20px 20px;
+    padding: 25px 20px 20px 20px;
     gap: 10px;
     margin: 0;
     position: relative;
@@ -237,6 +240,7 @@ body::before {
     flex-direction: column;
     justify-content: space-between;
     min-height: 120px;
+    max-width: 400px;
     align-items: flex-start;
 }
 
