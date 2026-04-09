@@ -3,12 +3,14 @@ let inventory = [];
 
 async function loadInventoryFromServer() {
     try {
-        const response = await fetch('https://api.com/inventory');
+        const response = await fetch('placeholder.php/get-  inventory');
         inventory = await response.json();
         renderInventory();
+        filterAndHighlight();
     }
     catch (error) {
         console.error("Failed to load inventory", error);
+        document.querySelector(".item-list").innerHTML = "<p style='position: fixed; color: white; text-align: center; bottom: 150px; right: 450px;'>Unable to load items. Please try again later.</p>";
     }
 }
 loadInventoryFromServer();
