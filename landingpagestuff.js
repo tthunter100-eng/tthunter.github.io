@@ -1,6 +1,6 @@
 // Handle "Continue as Guest" button click
 document.getElementById('continueGuestBtn').addEventListener('click', function() {
-    window.location.href = '../User Interface/index.html';
+    window.location.href = 'user.html';
 });
 
 // Handle Login button click
