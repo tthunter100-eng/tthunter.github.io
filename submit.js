@@ -251,7 +251,7 @@ cancelButton.onclick = () => {
     if(confirm("Are you sure? Your progress will be lost.")) {
     pForm.reset();
     iForm.reset();
-    window.location.href = "index.html"
+    window.location.href = "user.html"
     }
 };
 
