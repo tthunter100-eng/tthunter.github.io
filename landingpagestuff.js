@@ -1,6 +1,6 @@
 // Handle "Continue as Guest" button click
 document.getElementById('continueGuestBtn').addEventListener('click', function() {
-    window.location.href = 'User%20Interface/user.html';
+    window.location.href = '/User%20Interface/user.html';
 });
 
 // Handle Login button click
@@ -31,7 +31,7 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 
     // Check if username and password are "admin"
     if (username === 'admin' && password === 'admin') {
-        window.location.href = 'Admin%20Interface/adminindex.html';
+        window.location.href = '/Admin%20Interface/adminindex.html';
     } else {
         errorMessage.textContent = 'Username or password incorrect';
         errorMessage.style.display = 'block';
