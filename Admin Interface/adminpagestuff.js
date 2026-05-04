@@ -99,8 +99,8 @@ function renderItems() {
     
     const filteredItems = items.filter(item => {
         const matchesFilter = currentFilter === 'all' || item.status === currentFilter;
-        const matchesSearch = item.code.toLowerCase().includes(searchText) || 
-                              item.name.toLowerCase().includes(searchText);
+        const matchesSearch = item.code?.toLowerCase().includes(searchText) || 
+                              item.name?.toLowerCase().includes(searchText);
         return matchesFilter && matchesSearch;
     });
 
@@ -148,7 +148,7 @@ function viewItem(mongoId) {
     const entry = activeData.find(e => e._id === mongoId || e.id === mongoId);
     if (!entry) return;
 
-    currentlyViewingId = id;
+    currentlyViewingId = mongoId;
     document.getElementById('itemForm').style.display = 'none';
     document.getElementById('itemView').style.display = 'block';
     sidebar.style.display = 'block';
@@ -453,37 +453,37 @@ saveBtn.addEventListener('click', async () => {
   const endpoint = isTicket ? '/api/tickets' : '/api/inventory';
   let entry = {};
 
-  if (isTicket) {
-    const fullName = document.getElementById('fullName').value.trim();
-    const role = document.getElementById('role').value.trim();
-    const studentNumber = document.getElementById('studentNumber').value.trim();
-    const program = document.getElementById('program').value.trim();
-    const department = document.getElementById('department').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const status = document.getElementById('ticketStatus').value;
+  try {
+    if (isTicket) {
+      const fullName = document.getElementById('fullName').value.trim();
+      const role = document.getElementById('role').value.trim();
+      const studentNumber = document.getElementById('studentNumber').value.trim();
+      const program = document.getElementById('program').value.trim();
+      const department = document.getElementById('department').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const status = document.getElementById('ticketStatus').value;
 
-    if (!fullName || !role || !studentNumber || !program || !department || !email) {
-      alert("Please fill in all ticket fields.");
-      return;
-    }
-
-    entry = { fullName, role, studentNumber, program, department, email, status };
-  }
-  else {
-    const codeInput = document.getElementById('code').value.trim();
-    const nameInput = document.getElementById('itemName').value.trim(); 
-  }
-
-    // 2. Validate values directly
-    if (!codeInput || !nameInput) {
-        alert("Please fill in the Code and Item Name.");
+      if (!fullName || !role || !studentNumber || !program || !department || !email) {
+        alert("Please fill in all ticket fields.");
         return;
-    }
+      }
 
-    // 3. Create the entry object
+      entry = { fullName, role, studentNumber, program, department, email, status };
+    }
+    else {
+      const code = document.getElementById('code').value.trim();
+      const name = document.getElementById('itemName').value.trim();
+
+      // 2. Validate values directly
+      if (!code || !name) {
+          alert("Please fill in the Code and Item Name.");
+          return;
+      }
+
+      // 3. Create the entry object
       entry = {
-        codeInput,
-        nameInput,
+        code,
+        name,
         status: statusSelect.value,
         description: document.getElementById('description').value,
         seenWhen: document.getElementById('seenWhen').value,
@@ -491,10 +491,9 @@ saveBtn.addEventListener('click', async () => {
         surrenderedBy: document.getElementById('surrenderedBy').value,
         claimedBy: document.getElementById('claimedBy').value,
         dateClaimed: document.getElementById('dateClaimed').value
-    };
-
-    // 4. Push to correct array based on currentSection
-    try {
+      };
+    }
+      // 4. Push to correct array based on currentSection
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -511,16 +510,17 @@ saveBtn.addEventListener('click', async () => {
           items.push(savedData);
         }
 
-        //Sidebar UI cleanup
+          //Sidebar UI cleanup
         sidebar.style.display = 'none';
         const formElement = document.querySelector('#itemForm form');
         if (formElement) formElement.reset();
-    
+      
         renderList();
         alert(`${isTicket ? 'Ticket' : 'Item'} saved successfully!`);
       }
       else {
-        throw new Error("Failed to save to database");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to save to database");
       }
     }
     catch (err) {
