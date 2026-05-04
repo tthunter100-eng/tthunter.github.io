@@ -3,7 +3,7 @@ let inventory = [];
 
 async function loadInventoryFromServer() {
     try {
-        const response = await fetch('/api/inventory.js');
+        const response = await fetch('/api/inventory');
         inventory = await response.json();
         renderInventory();
         filterAndHighlight();
