@@ -49,13 +49,25 @@ editStatusSelect.addEventListener('change', function() {
 
 // --- Navigation & Sidebar Logic ---
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const itemsBtn = document.getElementById('items');
     if (itemsBtn) {
         itemsBtn.classList.add('selected');
         itemsPanel.style.display = 'flex';
     }
-    renderItems(); // Initialize empty list
+    
+    try {
+      const itemRes = await fetch('/api/inventory');
+      items = await itemRes.json();
+
+      const ticketRes = await fetch('/api/tickets');
+      tickets = await ticketRes.json();
+
+      renderList();
+    }
+    catch (err) {
+      console.error("Failed to load data.", err);
+    }
 });
 
 searchAdd.addEventListener('click', () => {
@@ -131,9 +143,9 @@ searchAdd.addEventListener('click', () => {
     });
 }
 
-function viewItem(id) {
+function viewItem(mongoId) {
     const activeData = currentSection === 'items' ? items : tickets;
-    const entry = activeData.find(e => e.id === id);
+    const entry = activeData.find(e => e._id === mongoId || e.id === mongoId);
     if (!entry) return;
 
     currentlyViewingId = id;
@@ -436,8 +448,12 @@ searchAdd.addEventListener('click', () => {
 });
 
 // Single Save Button Listener
-saveBtn.addEventListener('click', () => {
-  if (currentSection === 'tickets') {
+saveBtn.addEventListener('click', async () => {
+  const isTicket = currentSection === 'tickets';
+  const endpoint = isTicket ? '/api/tickets' : '/api/inventory';
+  let entry = {};
+
+  if (isTicket) {
     const fullName = document.getElementById('fullName').value.trim();
     const role = document.getElementById('role').value.trim();
     const studentNumber = document.getElementById('studentNumber').value.trim();
@@ -451,38 +467,24 @@ saveBtn.addEventListener('click', () => {
       return;
     }
 
-    const ticket = {
-      id: Date.now(),
-      fullName,
-      role,
-      studentNumber,
-      program,
-      department,
-      email,
-      status
-    };
-
-    tickets.push(ticket);
-    sidebar.style.display = 'none';
-    document.querySelector('#itemForm form').reset();
-    renderList();
-    return;
+    entry = { id: Date.now(), fullName, role, studentNumber, program, department, email, status };
+  }
+  else {
+    const codeInput = document.getElementById('code').value.trim();
+    const nameInput = document.getElementById('itemName').value.trim(); 
   }
 
- const codeInput = document.getElementById('code');
-  const nameInput = document.getElementById('itemName');
-
     // 2. Validate values directly
-    if (!codeInput.value.trim() || !nameInput.value.trim()) {
+    if (!codeInput || !nameInput) {
         alert("Please fill in the Code and Item Name.");
         return;
     }
 
     // 3. Create the entry object
-    const entry = {
+      entry = {
         id: Date.now(),
-        code: codeInput.value,
-        name: nameInput.value,
+        codeInput,
+        nameInput,
         status: statusSelect.value,
         description: document.getElementById('description').value,
         seenWhen: document.getElementById('seenWhen').value,
@@ -493,17 +495,37 @@ saveBtn.addEventListener('click', () => {
     };
 
     // 4. Push to correct array based on currentSection
-    if (currentSection === 'items') {
-        items.push(entry);
-    } else {
-        tickets.push(entry);
-    }
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entry)
+      });
 
-    // 5. UI Cleanup
-    sidebar.style.display = 'none';
-    const formElement = document.querySelector('#itemForm form');
-    if (formElement) formElement.reset();
+      if (response.ok) {
+        const savedData = await response.json();
+
+        if (isTicket) {
+          tickets.push(savedData);
+        }
+        else {
+          items.push(savedData);
+        }
+
+        //Sidebar UI cleanup
+        sidebar.style.display = 'none';
+        const formElement = document.querySelector('#itemForm form');
+        if (formElement) formElement.reset();
     
-    renderList(); // Refresh the list view
+        renderList();
+        alert(`${isTicket ? 'Ticket' : 'Item'} saved successfully!`);
+      }
+      else {
+        throw new Error("Failed to save to database");
+      }
+    }
+    catch (err) {
+      console.error("Save Error:", err);
+      alert("Error connecting to server. Please try again.");
+    }
 });
-
