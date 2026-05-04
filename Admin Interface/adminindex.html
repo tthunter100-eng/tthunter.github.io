@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Interface</title>
+    <link rel="stylesheet" href="adminlost.css">
+</head>
+<body>
+    <div class="header">
+        <div class="nav-item" id="items">Items</div>
+        <div class="nav-item" id="tickets">Tickets</div>
+        <div class="nav-item" id="history">History</div>
+    </div>
+
+    <div class="items-panel" id="itemsPanel">
+        <div class="items-card-wrap">
+            <div class="items-card">
+                <div class="search-row">
+                    <input type="text" class="search-bar" placeholder="Search items...">
+                    <button class="search-add">+</button>
+                </div>
+                <div class="search-underlay"></div>
+                <div class="right-sidebar">
+                    <div class="item-form" id="itemForm">
+    <form>
+        <!-- Item-specific fields -->
+        <div id="itemSpecificFields">
+            <div class="field-row"><span>Code:</span><input type="text" id="code"></div>
+            <div class="field-row"><span>Item Name:</span><input type="text" id="itemName"></div>
+            <div class="field-row field-row-textarea"><span>Description:</span><textarea id="description"></textarea></div>
+            <div class="field-row"><span>Seen at (when):</span><input type="text" id="seenWhen"></div>
+            <div class="field-row"><span>Seen at (where):</span><input type="text" id="seenWhere"></div>
+            <div class="field-row"><span>Surrendered by:</span><input type="text" id="surrenderedBy"></div>
+            <div id="claimedFields" style="display: none;">
+                <div class="field-row"><span>Claimed by:</span><input type="text" id="claimedBy"></div>
+                <div class="field-row"><span>Date Claimed:</span><input type="date" id="dateClaimed"></div>
+            </div>
+            <div class="field-row"><span>Status:</span>
+                <select id="status">
+                    <option value="unclaimed">Unclaimed</option>
+                    <option value="claimed">Claimed</option>
+                    <option value="archived">Archived</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Ticket-specific fields -->
+        <div id="ticketFields" style="display:none;">
+            <div class="field-row"><span>Full Name:</span><input type="text" id="fullName"></div>
+            <div class="field-row"><span>Role in School:</span><input type="text" id="role"></div>
+            <div class="field-row"><span>Student Number:</span><input type="text" id="studentNumber"></div>
+            <div class="field-row"><span>Program:</span><input type="text" id="program"></div>
+            <div class="field-row"><span>Department:</span><input type="text" id="department"></div>
+            <div class="field-row"><span>Email Address:</span><input type="email" id="email"></div>
+            <div class="field-row"><span>Status:</span>
+                <select id="ticketStatus">
+                    <option value="approved">Approved</option>
+                    <option value="pending">Pending</option>
+                    <option value="unapproved">Unapproved</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="button" id="saveBtn">Save</button>
+    </form>
+</div>
+                    <div class="item-view" id="itemView" style="display: none; padding: 20px;">
+    <h2 id="viewItemName" style="color: #1B4EA7; margin-top: 0;"></h2>
+    
+    <div id="ticketView" style="display:none;">
+  <div class="view-row"><strong>Full Name:</strong> <span id="viewFullName"></span></div>
+  <div class="view-row"><strong>Role in School:</strong> <span id="viewRole"></span></div>
+  <div class="view-row"><strong>Student Number:</strong> <span id="viewStudentNumber"></span></div>
+  <div class="view-row"><strong>Program:</strong> <span id="viewProgram"></span></div>
+  <div class="view-row"><strong>Department:</strong> <span id="viewDepartment"></span></div>
+  <div class="view-row"><strong>Email:</strong> <span id="viewEmail"></span></div>
+</div>
+
+    <div class="view-row"><strong>Code:</strong> <span id="viewCode"></span></div>
+    <div class="view-row"><strong>Description:</strong> <p id="viewDescription"></p></div>
+    <div class="view-row"><strong>Seen at (when):</strong> <span id="viewWhen"></span></div>
+    <div class="view-row"><strong>Seen at (where):</strong> <span id="viewWhere"></span></div>
+    <div class="view-row"><strong>Surrendered by:</strong> <span id="viewSurrendered"></span></div>
+    
+    <div id="viewClaimedGroup" style="display: none; margin-top: 10px; padding-top: 10px; border-top: 1px solid #ccc;">
+    <div class="view-row">
+        <strong>Claimed by:</strong> 
+        <span id="viewClaimedBy"></span>
+        <input type="text" id="editClaimedBy" style="display: none; width: 100%; margin-top: 5px;">
+    </div>
+    <div class="view-row">
+        <strong>Date Claimed:</strong> 
+        <span id="viewDateClaimed"></span>
+        <input type="date" id="editDateClaimed" style="display: none; width: 100%; margin-top: 5px;">
+    </div>
+</div>
+
+    <div class="view-row" style="margin-top: 15px;">
+        <strong>Status:</strong> 
+        <span id="viewStatusBadge" style="padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold; font-size: 10px;"></span>
+        <select id="editStatusSelect" style="display: none; margin-left: 10px; padding: 2px;">
+            <option value="unclaimed">Unclaimed</option>
+            <option value="claimed">Claimed</option>
+            <option value="archived">Archived</option>
+        </select>
+    </div>
+
+    <div class="view-actions" style="position: absolute; bottom: 15px; right: 15px; display: flex; gap: 10px;">
+        <button type="button" id="deleteBtn" style="background: #e74c3c; display: none;">Delete Item</button>
+        <button type="button" id="editBtn" style="background: #1B4EA7;">Edit Status</button>
+        <button type="button" id="saveEditBtn" style="background: #27ae60; display: none;">Save Changes</button>
+        <button type="button" id="closeViewBtn" style="background: #888;">Close</button>
+    </div>
+</div>
+                </div>
+            </div>
+            <div class="filter-block selected" id="filterAll" data-filter="all">All</div>
+            <div class="filter-block" id="filterClaimed" data-filter="claimed">Claimed</div>
+            <div class="filter-block" id="filterUnclaimed" data-filter="unclaimed">Unclaimed</div>
+            <div class="filter-block" id="filterArchived" data-filter="archived">Archived</div>
+        </div>
+    </div>
+
+    <script src="adminpagestuff.js"></script>
+</body>
+</html>

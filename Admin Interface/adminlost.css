@@ -1,0 +1,358 @@
+body {
+    background-image: url('ADI-GALAXY_BG.png');
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header {
+    background-color: #1B4EA7;
+    height: 30%;
+    display: flex;
+    justify-content: left;
+    align-items: stretch;
+    gap: 1px;
+    height: 70px;
+}
+
+.nav-item {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: background-color 0.3s;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding-left : 20px;
+    padding-right: 20px;
+    margin-left: 10px;
+}
+
+.nav-item:hover {
+    background-color: #143B8A; 
+}
+
+.nav-item.selected {
+    background-color: #10327A; 
+}
+
+.hidden {
+    display: none;
+}
+
+.items-panel {
+    position: relative;
+    width: 100%;
+    min-height: 520px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.items-card-wrap {
+    position: relative;
+    width: min(95%, 1200px);
+    height: 520px;
+}
+
+.items-card {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    width: 100%;
+    height: 105%;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 0px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+    top: 30px;
+    
+}
+
+.search-row {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-bar {
+    width: 300px;
+    height: 40px;
+    padding: 0 15px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #10327A;
+}
+
+.search-add {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #1B4EA7;
+    color: white;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(27, 78, 167, 0.28);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.search-add:hover {
+    transform: translateY(-2px);
+    background: #10327A;
+}
+
+.search-underlay {
+    position: absolute;
+    top: 75px;
+    left: 20px;
+    width: 370px;
+    height: 420px;
+    background: rgba(16, 50, 122, 0.08);
+    border-radius: 18px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.right-sidebar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    bottom: 15px;
+    width: 700px;
+    background: #f0f0f0;
+    border: 2px solid #1B4EA7;
+    border-radius: 0;
+    display: none;
+}
+.item-form {
+    padding: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+.item-form button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background: #1B4EA7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.item-form button:hover {
+    background: #10327A;
+}
+
+.field-row {
+    display: grid;
+    width: 50%;
+    grid-template-columns: max-content 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 11px;
+    align-items: center;
+}
+
+.field-row-textarea {
+    align-items: flex-start;
+}
+
+.field-row span {
+    white-space: nowrap;
+}
+
+.item-form input, .item-form select, .item-form textarea {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 12px;
+}
+
+.item-form textarea {
+    height: 60px;
+    resize: vertical;
+}
+
+.item-form select {
+    background: #fff;
+    cursor: pointer;
+}
+
+.filter-block {
+    position: absolute;
+    width: 120px;
+    height: 70px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(16, 50, 122, 0.12);
+    box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16);
+    color: #10327A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease, z-index 0s;
+    z-index: 2;
+    min-width: 120px;
+    padding: 0 5px;
+}
+
+.filter-block:hover {
+    transform: translateY(-5px);
+}
+
+.filter-block.selected {
+    background-color: lightgray;
+    color: black;
+    z-index: 10;
+}
+
+#filterAll {
+    top: -25px;
+    left: 28px;
+}
+
+#filterClaimed {
+    top: -25px;
+    left: 168px;
+}
+
+#filterUnclaimed {
+    top: -25px;
+    left: 308px;
+}
+
+#filterArchived {
+    top: -25px;
+    left: 448px;
+}
+
+.list-item-entry {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.item-code {
+    font-weight: bold;
+    color: #1B4EA7;
+    margin-right: 15px;
+    min-width: 60px;
+}
+
+.item-name {
+    flex-grow: 1;
+    color: #333;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto; 
+}
+
+.status-text {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.list-item-entry {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border-left: 4px solid #1B4EA7; /* Added a small accent for style */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.view-actions button {
+    padding: 8px 16px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+.view-actions button:hover {
+    opacity: 0.9;
+}
+
+/* Ensure the status dropdown doesn't look out of place */
+#editStatusSelect {
+    font-size: 12px;
+    border: 1px solid #1B4EA7;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+#editClaimedBy, #editDateClaimed {
+    padding: 4px;
+    border: 1px solid #1B4EA7;
+    border-radius: 3px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+.item-description {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
