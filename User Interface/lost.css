@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     margin: 0;
     font-family: 'DM Sans', sans-serif;
@@ -209,3 +210,216 @@ body::before {
     transform: translateY(-2px);
     background-color: #1b284d;
 }
+=======
+body {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    color: #333;
+    background-color: black;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -30px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+    z-index: -1;
+    transform: scale(1.1);
+    background-image: url('CDM\ background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.header {
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo-background {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.school-logo {
+    width: 90px;
+    height: auto;
+}
+
+.header-titles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header-titles h1 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.header-titles h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.header-titles h3 {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.1;
+}
+
+
+
+
+@property --grad-color-1 {
+    syntax: '<color>';
+    initial-value: black;
+    inherits: false;
+}
+
+
+
+
+@property --grad-color-2 {
+    syntax: '<color>';
+    initial-value: blue;
+    inherits: false;
+}
+
+
+
+
+.create-ticket-btn {
+    background: linear-gradient(to right, var(--grad-color-1), var(--grad-color-2));
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50px;
+    border: none;
+    transition: transform 0.2s ease, --grad-color-1 0.5s ease, --grad-color-2 0.5s ease;
+    font-size: 18px;
+    display: flex; 
+    flex-direction: row; 
+    padding: 5px 15px; 
+    gap: 10px; 
+    align-items: center;
+}
+
+
+
+
+.create-ticket-btn:hover {
+    --grad-color-1: blue;
+    --grad-color-2: black;
+    transform: scale(1.5);
+    color: white;
+}
+
+
+
+
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    padding: 20px;
+    box-sizing: border-box;
+    padding-top: 150px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+
+
+
+.item-list-container {
+    background-color: #192b5e;
+    opacity: 0.93;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100vw;
+    text-align: center;
+    justify-content: center;
+    position: fixed;
+    height: 45vh;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
+
+
+
+.item-list {
+    list-style: none;
+    display: grid;
+    padding: 25px 20px 20px 20px;
+    gap: 10px;
+    margin: 0;
+    position: relative;
+    grid-template-columns: repeat(4, 1fr);
+    align-content: start;
+}
+
+
+
+
+.item-list li {
+    background-color: #111b35;
+    text-align: left;
+    padding: 15px;
+    font-size: 18px;
+    color: #fff;
+    transition: background-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 120px;
+    max-width: 400px;
+    align-items: flex-start;
+}
+
+
+
+
+.item-list li:hover {
+    transform: translateY(-2px);
+    background-color: #1b284d;
+}
+>>>>>>> 06bb0b83448444ed5da3010ac90b4d303e59eaa1
