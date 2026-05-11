@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     try {
-      const itemRes = await fetch('${API_BASE_URL}/api/inventory');
+      const itemRes = await fetch(`${API_BASE_URL}/api/inventory`);
       items = await itemRes.json();
 
-      const ticketRes = await fetch('${API_BASE_URL}/api/tickets');
+      const ticketRes = await fetch(`${API_BASE_URL}/api/tickets`;
       tickets = await ticketRes.json();
 
       renderList();
@@ -450,7 +450,7 @@ searchAdd.addEventListener('click', () => {
 // Single Save Button Listener
 saveBtn.addEventListener('click', async () => {
   const isTicket = currentSection === 'tickets';
-  const endpoint = isTicket ? '${API_BASE_URL}/api/tickets' : '${API_BASE_URL}/api/inventory';
+  const endpoint = isTicket ? `${API_BASE_URL}/api/tickets` : `${API_BASE_URL}/api/inventory`;
   let entry = {};
 
   try {
