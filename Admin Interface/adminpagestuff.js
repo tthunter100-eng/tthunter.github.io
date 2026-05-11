@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const itemRes = await fetch(`${API_BASE_URL}/api/inventory`);
       items = await itemRes.json();
 
-      const ticketRes = await fetch(`${API_BASE_URL}/api/tickets`;
+      const ticketRes = await fetch(`${API_BASE_URL}/api/tickets`);
       tickets = await ticketRes.json();
 
       renderList();
