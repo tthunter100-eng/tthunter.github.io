@@ -23,7 +23,6 @@ async function startServer() {
     }
     catch (error) {
         console.error("Connection Error Detail:", error.message);
-        // If it fails, wait 5 seconds and try one more time
         console.log("Retrying connection in 5 seconds...");
         setTimeout(startServer, 5000);
     }
