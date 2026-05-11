@@ -3,7 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const connectToDatabase = require('./db');
 const app = express();
+const dns = require('dns');
 
+dns.setServers(['8.8.8.8', '8.8.4.4']);
 app.use(cors());
 app.use(express.json());
 
