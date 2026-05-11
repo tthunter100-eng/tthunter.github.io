@@ -1,6 +1,6 @@
 //global inventory
 let globalInventory = [];
-const API_BASE_URL = "tthunter-github-io.onrender.com";
+const API_BASE_URL = "https://tthunter-github-io.onrender.com";
 
 //personal information section
 const personalInfo = document.createElement("div");
@@ -145,7 +145,7 @@ const lostDate = document.getElementById("lost-date");
 window.itemCodes = () => {
     if(!itemCode) return;
 
-    fetch('${API_BASE_URL}/api/inventory')
+    fetch(`${API_BASE_URL}/api/inventory`)
     .then(response => {
         if (!response.ok) throw new Error("Network response was not ok");
         return response.json();
@@ -209,6 +209,9 @@ document.querySelector(".div-container").appendChild(submitAndCancel);
 //submit button function
 const submitTicket = document.getElementById("submit-ticket");
 submitTicket.onclick = () => {
+    const pForm = document.getElementById("pInfo");
+    const iForm = document.getElementById("iInfo");
+    const terms = document.getElementById("policy-check");
     const validatePersonal = validate(pForm);
     const validateItem = validate(iForm);
 
@@ -224,7 +227,7 @@ submitTicket.onclick = () => {
             combinedData.append(key, value);
         }
 
-        fetch('${API_BASE_URL}/api/tickets', {
+        fetch(`${API_BASE_URL}/api/tickets`, {
             method: 'POST',
             body: combinedData
         })
