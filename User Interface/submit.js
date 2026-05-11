@@ -225,7 +225,6 @@ submitTicket.onclick = () => {
 
         fetch('/api/tickets', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: combinedData
         })
         .then(res => res.json())
