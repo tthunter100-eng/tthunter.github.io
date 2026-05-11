@@ -5,7 +5,7 @@ const connectToDatabase = require('./db');
 const app = express();
 const dns = require('dns');
 
-dns.setServers(["1.1.1.1", "8.8.8.8"]);
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 app.use(cors());
 app.use(express.json());
 
@@ -13,17 +13,21 @@ let db;
 
 async function startServer() {
     try {
-        db = await connectToDatabase();
+        console.log("Attempting to connect to MongoDB...");
+        db = await connectToDatabase(); 
+        
         console.log("Connected to database successfully.");
 
-        const PORT = process.env.PORT || 3000;
-        app.listen(PORT, () => {
+        const PORT = process.env.PORT || 10000;
+        app.listen(PORT, '0.0.0.0', () => {
             console.log(`Server running on port ${PORT}`);
         });
     }
     catch (error) {
-        console.error("Failed to connect to the database.", error);
-        process.exit(1);
+        console.error("Connection Error Detail:", error.message);
+        // If it fails, wait 5 seconds and try one more time
+        console.log("Retrying connection in 5 seconds...");
+        setTimeout(startServer, 5000);
     }
 }
 
