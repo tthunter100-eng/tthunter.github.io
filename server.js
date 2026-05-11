@@ -5,7 +5,7 @@ const connectToDatabase = require('./db');
 const app = express();
 const dns = require('dns');
 
-dns.setServers(['8.8.8.8', '8.8.4.4']);
+dns.setServers(['1.1.1.1', '8.8.8.8']);
 app.use(cors());
 app.use(express.json());
 
