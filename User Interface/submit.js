@@ -175,7 +175,7 @@ itemCode.addEventListener("change", (e) => {
         enabledField(itemName, document.getElementById("sym-itemname"));
         enabledField(itemDesc, document.getElementById("sym-itemdesc"));
         itemName.value = matchedItem.name;
-        itemDesc.value = matchedItem.desc;
+        itemDesc.value = matchedItem.description;
     }
     else {
         disabledField(itemName, document.getElementById("sym-itemname"));
@@ -247,9 +247,11 @@ submitTicket.onclick = () => {
 const cancelButton = document.getElementById("submit-cancel");
 cancelButton.onclick = () => {
     if(confirm("Are you sure? Your progress will be lost.")) {
-    pForm.reset();
-    iForm.reset();
-    window.location.href = "user.html"
+        const pForm = document.getElementById("pInfo");
+        const iForm = document.getElementById("iInfo");
+        pForm.reset();
+        iForm.reset();
+        window.location.href = "user.html"
     }
 };
 
