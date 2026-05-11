@@ -1,5 +1,6 @@
 //global inventory
 let globalInventory = [];
+const API_BASE_URL = "tthunter-github-io.onrender.com";
 
 //personal information section
 const personalInfo = document.createElement("div");
@@ -223,7 +224,7 @@ submitTicket.onclick = () => {
             combinedData.append(key, value);
         }
 
-        fetch('/api/tickets', {
+        fetch('${API_BASE_URL}/api/tickets', {
             method: 'POST',
             body: combinedData
         })
