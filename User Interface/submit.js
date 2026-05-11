@@ -227,9 +227,11 @@ submitTicket.onclick = () => {
             combinedData.append(key, value);
         }
 
+        const plainObject = Object.fromEntries(combinedData.entries());
         fetch(`${API_BASE_URL}/api/tickets`, {
             method: 'POST',
-            body: combinedData
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(plainObject)
         })
         .then(res => res.json())
         .then(data => {
