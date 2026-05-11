@@ -39,6 +39,11 @@ Object.assign(lostSomething.style, {
 })
 document.querySelector(".header").appendChild(lostSomething);
 
+//anti double-injection
+if (!document.getElementById("ticket-button")) {
+    document.querySelector(".header").appendChild(lostSomething);
+}
+
 //redirect
 const submitTicket = document.getElementById("ticket-button");
 submitTicket.onclick = () => {
@@ -126,7 +131,7 @@ const filterAndHighlight = () => {
         if (badge) {
             rawText = rawText.replace(badge.innerText.toLowerCase(), '');
         }
-        const matchesCategory = currentCategory === "All" || itemCategory === currentCategory;
+        const matchesCategory = currentCategory === "All" || itemCategory.toLowerCase() === currentCategory.toLowerCase();
         const matchesQuery = rawText.includes(query);
 
         item.style.display = (matchesCategory && matchesQuery) ? "block" : "none";
