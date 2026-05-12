@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectToDatabase = require('./db');
 const app = express();
 const dns = require('node:dns/promises');
+const { ObjectId } = require('mongodb');
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 app.use(cors());
@@ -63,6 +64,19 @@ app.post('/api/inventory', async (req, res) => {
     }
 });
 
+app.put('/api/inventory/:id', async (req, res) => {
+    try {
+        const database = await getDb();
+        const result = await database.collection('items').updateOne(
+            { _id: new ObjectId(req.params.id) },
+            { $set: req.body }
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.get('/api/tickets', async (req, res) => {
     try {
         const database = await getDb(); // ADD THIS
@@ -82,6 +96,19 @@ app.post('/api/tickets', async (req, res) => {
         const result = await collection.insertOne(newTicket);
         newTicket._id = result.insertedId;
         res.status(201).json(newTicket);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.put('/api/tickets/:id', async (req, res) => {
+    try {
+        const database = await getDb();
+        const result = await database.collection('tickets').updateOne(
+            { _id: new ObjectId(req.params.id) },
+            { $set: req.body }
+        );
+        res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
