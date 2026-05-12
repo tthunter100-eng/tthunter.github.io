@@ -65,7 +65,8 @@ app.post('/api/inventory', async (req, res) => {
 
 app.get('/api/tickets', async (req, res) => {
     try {
-        const collection = db.collection('tickets');
+        const database = await getDb(); // ADD THIS
+        const collection = database.collection('tickets');
         const data = await collection.find({}).toArray();
         res.status(200).json(data);
     } catch (error) {
@@ -75,10 +76,10 @@ app.get('/api/tickets', async (req, res) => {
 
 app.post('/api/tickets', async (req, res) => {
     try {
-        const collection = db.collection('tickets');
+        const database = await getDb(); // ADD THIS
+        const collection = database.collection('tickets');
         const newTicket = { ...req.body };
         const result = await collection.insertOne(newTicket);
-        
         newTicket._id = result.insertedId;
         res.status(201).json(newTicket);
     } catch (error) {
