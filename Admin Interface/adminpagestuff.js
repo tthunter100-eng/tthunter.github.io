@@ -144,7 +144,7 @@ searchAdd.addEventListener('click', () => {
 
 function viewItem(mongoId) {
     const activeData = currentSection === 'items' ? items : tickets;
-    const entry = activeData.find(e => e._id === mongoId || e.id === mongoId);
+    const entry = activeData.find(e => (e._id === mongoId || e.id === mongoId));
     if (!entry) return;
 
     currentlyViewingId = mongoId;
