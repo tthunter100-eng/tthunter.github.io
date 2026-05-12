@@ -114,6 +114,30 @@ app.put('/api/tickets/:id', async (req, res) => {
     }
 });
 
+app.delete('/api/inventory/:id', async (req, res) => {
+    try {
+        const database = await getDb();
+        const result = await database.collection('items').deleteOne({
+            _id: new ObjectId(req.params.id)
+        });
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.delete('/api/tickets/:id', async (req, res) => {
+    try {
+        const database = await getDb();
+        const result = await database.collection('tickets').deleteOne({
+            _id: new ObjectId(req.params.id)
+        });
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 startServer();
 
 module.exports = app;
