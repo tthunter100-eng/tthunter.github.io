@@ -1,6 +1,5 @@
 //global inventory
 let globalInventory = [];
-const API_BASE_URL = "https://tthunter-github-io.onrender.com";
 
 //personal information section
 const personalInfo = document.createElement("div");
@@ -145,7 +144,7 @@ const lostDate = document.getElementById("lost-date");
 window.itemCodes = () => {
     if(!itemCode) return;
 
-    fetch(`${API_BASE_URL}/api/inventory`)
+    fetch(`/api/inventory`)
     .then(response => {
         if (!response.ok) throw new Error("Network response was not ok");
         return response.json();
@@ -228,7 +227,7 @@ submitTicket.onclick = () => {
         }
 
         const plainObject = Object.fromEntries(combinedData.entries());
-        fetch(`${API_BASE_URL}/api/tickets`, {
+        fetch('/api/tickets', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(plainObject)
