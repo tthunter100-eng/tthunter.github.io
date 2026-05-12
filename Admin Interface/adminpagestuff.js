@@ -270,28 +270,23 @@ document.getElementById('editBtn').addEventListener('click', () => {
 document.getElementById('saveEditBtn').addEventListener('click', async () => {
     const isItem = currentSection === 'items';
     const activeData = isItem ? items : tickets;
+    
     const entryIndex = activeData.findIndex(e => (e._id || e.id) === currentlyViewingId);
-
-    if (entryIndex === -1) return;
+    if (entryIndex === -1) {
+        alert("Error: Item not found in local list.");
+        return;
+    }
 
     const newStatus = document.getElementById('editStatusSelect').value;
-    
     const updatedFields = { status: newStatus };
 
     if (isItem) {
-        if (newStatus === 'claimed') {
-            updatedFields.claimedBy = document.getElementById('editClaimedBy').value;
-            updatedFields.dateClaimed = document.getElementById('editDateClaimed').value;
-        } else {
-            updatedFields.claimedBy = '';
-            updatedFields.dateClaimed = '';
-        }
+        updatedFields.claimedBy = document.getElementById('editClaimedBy').value;
+        updatedFields.dateClaimed = document.getElementById('editDateClaimed').value;
     }
 
     try {
-        const endpoint = isItem ? `/api/inventory/${currentlyViewingId}` : `/api/tickets/${currentlyViewingId}`;
-        
-        const response = await fetch(endpoint, {
+        const response = await fetch(`${isItem ? '/api/inventory' : '/api/tickets'}/${currentlyViewingId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedFields)
@@ -299,16 +294,15 @@ document.getElementById('saveEditBtn').addEventListener('click', async () => {
 
         if (response.ok) {
             activeData[entryIndex] = { ...activeData[entryIndex], ...updatedFields };
-            
             renderList(); 
             viewItem(currentlyViewingId);
-            alert("Changes saved to database!");
+            alert("Changes saved!");
         } else {
-            alert("Failed to save changes to server.");
+            const err = await response.json();
+            alert("Server Error: " + err.error);
         }
     } catch (err) {
-        console.error("Update Error:", err);
-        alert("Error connecting to server.");
+        alert("Connection failed. Is the server running?");
     }
 });
 
