@@ -4,7 +4,7 @@ let tickets = [];
 let currentlyViewingId = null;
 let currentSection = 'items'; // Track if we are in 'items' or 'tickets'
 let currentFilter = 'all'; // Track current filter (e.g., claimed, unclaimed, archived, pending, approved, unapproved)
-const API_BASE_URL = "https://tthunter-github-io.onrender.com";
+const API_BASE_URL = "";
 
 // DOM Elements
 const itemsPanel = document.getElementById('itemsPanel');
