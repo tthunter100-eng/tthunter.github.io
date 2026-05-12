@@ -37,10 +37,10 @@ async function getDb() {
     return db;
 }
 
-//inventory routes
 app.get('/api/inventory', async (req, res) => {
     try {
-        const collection = db.collection('items');
+        const database = await getDb();
+        const collection = database.collection('items');
         const data = await collection.find({}).toArray();
         res.status(200).json(data);
     }
@@ -51,7 +51,8 @@ app.get('/api/inventory', async (req, res) => {
 
 app.post('/api/inventory', async (req, res) => {
     try {
-        const collection = db.collection('items');
+        const database = await getDb();
+        const collection = database.collection('items');
         const newItem = { ...req.body };
         const result = await collection.insertOne(newItem);
         newItem._id = result.insertedId;
@@ -62,7 +63,6 @@ app.post('/api/inventory', async (req, res) => {
     }
 });
 
-//tickets routes
 app.get('/api/tickets', async (req, res) => {
     try {
         const collection = db.collection('tickets');
