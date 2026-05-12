@@ -313,15 +313,37 @@ document.getElementById('saveEditBtn').addEventListener('click', async () => {
 });
 
 // Pressing "Delete Item"
-document.getElementById('deleteBtn').addEventListener('click', () => {
-    if (confirm("Are you sure you want to delete this item?")) {
-        if (currentSection === 'items') {
-  items = items.filter(i => i.id !== currentlyViewingId);
-} else {
-  tickets = tickets.filter(t => t.id !== currentlyViewingId);
-}
-        sidebar.style.display = 'none';
-        renderItems();
+document.getElementById('deleteBtn').addEventListener('click', async () => {
+    if (confirm("Are you sure you want to delete this permanently?")) {
+        const isItem = currentSection === 'items';
+        
+        try {
+            const endpoint = isItem 
+                ? `/api/inventory/${currentlyViewingId}` 
+                : `/api/tickets/${currentlyViewingId}`;
+
+            const response = await fetch(endpoint, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                // Update local data only after server confirms
+                if (isItem) {
+                    items = items.filter(i => (i._id || i.id) !== currentlyViewingId);
+                } else {
+                    tickets = tickets.filter(t => (t._id || t.id) !== currentlyViewingId);
+                }
+
+                sidebar.style.display = 'none';
+                renderList(); // Use renderList since it handles both sections
+                alert("Deleted successfully!");
+            } else {
+                alert("Failed to delete from server.");
+            }
+        } catch (err) {
+            console.error("Delete Error:", err);
+            alert("Error connecting to server.");
+        }
     }
 });
 
