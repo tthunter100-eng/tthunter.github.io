@@ -225,7 +225,7 @@ function updateStatusBadge(status) {
 // Pressing "Edit Status"
 document.getElementById('editBtn').addEventListener('click', () => {
   const activeData = currentSection === 'items' ? items : tickets;
-  const entry = activeData.find(e => e.id === currentlyViewingId);
+  const entry = activeData.find(e => (e._id || e.id) === currentlyViewingId);
 
   // Toggle UI to 'Edit Mode'
   document.getElementById('viewStatusBadge').style.display = 'none';
