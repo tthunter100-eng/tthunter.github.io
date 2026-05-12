@@ -1,10 +1,9 @@
 //fetch data
 let inventory = [];
-const API_BASE_URL = "https://tthunter-github-io.onrender.com";
 
 async function loadInventoryFromServer() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/inventory`);
+        const response = await fetch('/api/inventory');
         inventory = await response.json();
         renderInventory();
         filterAndHighlight();
