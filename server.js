@@ -7,7 +7,10 @@ const dns = require('node:dns/promises');
 const { ObjectId } = require('mongodb');
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
-app.use(cors());
+app.use(cors({
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: '*' 
+}));
 app.use(express.json());
 
 let db;
