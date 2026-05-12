@@ -267,36 +267,49 @@ document.getElementById('editBtn').addEventListener('click', () => {
 });
 
 // Pressing "Save Changes"
-document.getElementById('saveEditBtn').addEventListener('click', () => {
-  if (currentSection === 'items') {
-    const itemIndex = items.findIndex(i => i.id === currentlyViewingId);
+document.getElementById('saveEditBtn').addEventListener('click', async () => {
+    const isItem = currentSection === 'items';
+    const activeData = isItem ? items : tickets;
+    const entryIndex = activeData.findIndex(e => (e._id || e.id) === currentlyViewingId);
 
-    if (itemIndex !== -1) {
-      const newStatus = document.getElementById('editStatusSelect').value;
-      items[itemIndex].status = newStatus;
+    if (entryIndex === -1) return;
 
-      if (newStatus === 'claimed') {
-        items[itemIndex].claimedBy = document.getElementById('editClaimedBy').value;
-        items[itemIndex].dateClaimed = document.getElementById('editDateClaimed').value;
-      } else {
-        items[itemIndex].claimedBy = '';
-        items[itemIndex].dateClaimed = '';
-      }
+    const newStatus = document.getElementById('editStatusSelect').value;
+    
+    const updatedFields = { status: newStatus };
 
-      renderItems(); // Refresh main list
-      viewItem(currentlyViewingId); // Refresh sidebar view
+    if (isItem) {
+        if (newStatus === 'claimed') {
+            updatedFields.claimedBy = document.getElementById('editClaimedBy').value;
+            updatedFields.dateClaimed = document.getElementById('editDateClaimed').value;
+        } else {
+            updatedFields.claimedBy = '';
+            updatedFields.dateClaimed = '';
+        }
     }
-  } else if (currentSection === 'tickets') {
-    const ticketIndex = tickets.findIndex(t => t.id === currentlyViewingId);
 
-    if (ticketIndex !== -1) {
-      const newStatus = document.getElementById('editStatusSelect').value;
-      tickets[ticketIndex].status = newStatus;
+    try {
+        const endpoint = isItem ? `/api/inventory/${currentlyViewingId}` : `/api/tickets/${currentlyViewingId}`;
+        
+        const response = await fetch(endpoint, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedFields)
+        });
 
-      renderList(); // Refresh ticket list
-      viewItem(currentlyViewingId); // Refresh sidebar view
+        if (response.ok) {
+            activeData[entryIndex] = { ...activeData[entryIndex], ...updatedFields };
+            
+            renderList(); 
+            viewItem(currentlyViewingId);
+            alert("Changes saved to database!");
+        } else {
+            alert("Failed to save changes to server.");
+        }
+    } catch (err) {
+        console.error("Update Error:", err);
+        alert("Error connecting to server.");
     }
-  }
 });
 
 // Pressing "Delete Item"
