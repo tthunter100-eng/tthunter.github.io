@@ -80,3 +80,5 @@ app.post('/api/tickets', async (req, res) => {
 });
 
 startServer();
+
+module.exports = app;
