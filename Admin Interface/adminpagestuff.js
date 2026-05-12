@@ -423,7 +423,7 @@ function renderList() {
     const itemEl = document.createElement('div');
     itemEl.className = 'list-item-entry';
     itemEl.style.cursor = 'pointer';
-    itemEl.addEventListener('click', () => viewItem(entry._id || entry.id));
+    itemEl.addEventListener('click', () => viewItem(entry._id));
 
     const colors = {
       claimed: '#27ae60', approved: '#27ae60',
