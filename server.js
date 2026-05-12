@@ -30,6 +30,13 @@ async function startServer() {
     }
 }
 
+async function getDb() {
+    if (!db) {
+        db = await connectToDatabase();
+    }
+    return db;
+}
+
 //inventory routes
 app.get('/api/inventory', async (req, res) => {
     try {
