@@ -75,7 +75,7 @@ roleSelect.addEventListener("change", () => {
 
 function enabledField(input, symbolSpan) {
     input.value = "";
-    input.disabled = false;
+    input.readOnly = false;
     input.required = true;
     input.style.backgroundColor = "#ffffff";
     input.style.color = "#000000";
@@ -84,7 +84,7 @@ function enabledField(input, symbolSpan) {
 
 function disabledField(input, symbolSpan) {
         input.value = "N/A";
-        input.disabled = true;
+        input.readOnly = true;
         input.required = false;
         input.style.backgroundColor = "#d1d1d1";
         input.style.color = "#757575";
