@@ -11,24 +11,24 @@ personalInfo.innerHTML = `
     <div style="box-sizing: border-box; margin-top: 50px; height: 100%; width: 100%; position: relative; display: flex; flex-direction: column; padding: 20px 20px;">
         <form action="ticket.php" id="pInfo" method="post">
             <label for="personname" style="font-size: 15px;">Full Name:</label><span style="color: red; font-weight: bold;">*</span><br>
-            <input name="full_name" id="person-name" style="height: 20px; width: 100%; background-color: #ffffff; border: none;" required><br><br>
+            <input name="fullName" id="person-name" style="height: 20px; width: 100%; background-color: #ffffff; border: none;" required><br><br>
             <label for="personrole" style="font-size: 15px;">Role in School:</label><span style="color: red; font-weight: bold;">*</span><br>
-            <select name="school_role" id="person-role" style="transition: 0.1s ease; height: 30px; min-width: 150px; background-color: transparent; border: none;" required><br><br>
+            <select name="role" id="person-role" style="transition: 0.1s ease; height: 30px; min-width: 150px; background-color: transparent; border: none;" required><br><br>
                 <option value="" disabled selected>Select a role</option>
                 <option value="student">Student</option>
                 <option value="staff">Staff</option>
                 <option value="guest">Guest</option>
             </select><br><br>
             <label for="studentnumber" style="font-size: 15px;">Student Number (if applicable):</label><span id="sym-num" style="color: red; font-weight: bold;">/</span><br>
-            <input name="student_number" value="N/A" id="student-number" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
+            <input name="studentNumber" value="N/A" id="student-number" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
             <label for="studentprogram" style="font-size: 15px;">Program (if applicable):</label><span id="sym-prog" style="color: red; font-weight: bold;">/</span><br>
-            <input name="student_program" value="N/A" id="student-program" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
+            <input name="program" value="N/A" id="student-program" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
             <label for="persondept" style="font-size: 15px;">Department (if applicable):</label><span id="sym-dept" style="color: red; font-weight: bold;">/</span><br>
-            <input name="person_department" value="N/A" id="person-dept" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;"disabled><br><br>
+            <input name="department" value="N/A" id="person-dept" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;"disabled><br><br>
             <label for="email" style="font-size: 15px;">Email Address:</label><span style="color: red; font-weight: bold;">*</span><br>
-            <input name="person_email" id="email" style="height: 20px; width: 100%; background-color: #ffffff; border: none;" required><br><br>
+            <input name="email" id="email" style="height: 20px; width: 100%; background-color: #ffffff; border: none;" required><br><br>
             <label for="identification" style="font-size: 15px;">School ID/COR/Staff ID/Government ID for Verification:</label><span style="color: red; font-weight: bold;">*</span><br>
-            <input name="id_image" type="file" accept="image/*" id="identification" style="height: 30px; width: 100%; border: none;" required><br><br>
+            <input name="idImage" type="file" accept="image/*" id="identification" style="height: 30px; width: 100%; border: none;" required><br><br>
         </form>
     </div>
 `;
@@ -101,21 +101,21 @@ itemInfo.innerHTML = `
     <div style="box-sizing: border-box; margin-top: 90px; height: 100%; width: 100%; position: relative; display: flex; flex-direction: column; padding: 20px 40px;">
         <form action="ticket.php" id="iInfo" method="post">
             <label for="itemcode" style="font-size: 15px;">Code:</label><span style="color: red; font-weight: bold;">*</span><br>
-            <select name="item_code" id="item-code" style="transition: 0.1s ease; height: 30px; min-width: 150px; background-color: transparent; border: none;" required>
+            <select name="code" id="item-code" style="transition: 0.1s ease; height: 30px; min-width: 150px; background-color: transparent; border: none;" required>
                 <option value="" disabled selected>Select a code</option>
             </select><br><br>
             <label for="itemname" style="font-size: 15px;">Item Name:</label><span id="sym-itemname" style="color: red; font-weight: bold;">/</span><br>
-            <input name="item_name" value="N/A" id="item-name" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
+            <input name="name" value="N/A" id="item-name" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
             <label for="itemdesc" style="font-size: 15px;">Item Description:</label><span id="sym-itemdesc" style="color: red; font-weight: bold;">/</span><br>
-            <input name="item_desc" value="N/A" id="item-desc" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
+            <input name="description" value="N/A" id="item-desc" style="height: 20px; width: 100%; background-color: #d1d1d1; border: none;" disabled><br><br>
             <label for="features" style="font-size: 15px;">Distinguishing Features:</label><br>
-            <input name="item_features" id="features" style="height: 20px; width: 100%; background-color: #ffffff; border: none;"><br><br>
+            <input name="distinguishingFeatures" id="features" style="height: 20px; width: 100%; background-color: #ffffff; border: none;"><br><br>
             <label for="lastknownloc" style="font-size: 15px;">Last Known Location:</label><span style="color: red; font-weight: bold;">*</span><br>
-            <input name="last_location" id="last-loc" style="height: 20px; width: 100%; background-color: #ffffff; border: none;" required><br><br>
+            <input name="seenWhere" id="last-loc" style="height: 20px; width: 100%; background-color: #ffffff; border: none;" required><br><br>
             <label for="lostdate" style="font-size: 15px;">Date Lost:</label><br>
-            <input name="lost_date" type="date" id="lost-date" style="height: 20px; width: 100%; background-color: #ffffff; border: none;"><br><br>
+            <input name="seenWhen" type="date" id="lost-date" style="height: 20px; width: 100%; background-color: #ffffff; border: none;"><br><br>
             <label for="itempic" style="font-size: 15px;">Picture of the item (optional):</label><br>
-            <input name="item_image" type="file" accept="image/*" id="item-pic" style="height: 30px; width: 100%; border: none;"><br><br>
+            <input name="itemImage" type="file" accept="image/*" id="item-pic" style="height: 30px; width: 100%; border: none;"><br><br>
         </form>
     </div>
 `;
