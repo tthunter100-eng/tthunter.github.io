@@ -310,6 +310,7 @@ document.getElementById('saveEditBtn').addEventListener('click', async () => {
 document.getElementById('deleteBtn').addEventListener('click', async () => {
     if (confirm("Are you sure you want to delete this permanently?")) {
         const isItem = currentSection === 'items';
+        console.log("Deleting ID:", currentlyViewingId);
         
         try {
             const endpoint = isItem 
