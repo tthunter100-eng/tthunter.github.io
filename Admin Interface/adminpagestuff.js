@@ -268,6 +268,10 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
 
             const response = await fetch(endpoint, {
                 method: 'DELETE'
+
+                const responseText = await response.text();
+console.log("Status:", response.status);
+console.log("Body:", responseText);
             });
 
             if (response.ok) {
