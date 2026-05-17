@@ -164,13 +164,13 @@ window.itemCodes = () => {
         console.error("Error fetching inventory: ", error);
         itemCode.innerHTML = `<option value="" disabled selected>Select a code</option>`;
     });
+};  
 
-    document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     if (typeof window.itemCodes === 'function') {
         window.itemCodes();
     }
 });
-};  
 
 itemCode.addEventListener("change", (e) => {
     const selectedCode = e.target.value;
