@@ -181,10 +181,14 @@ itemCode.addEventListener("change", (e) => {
         enabledField(itemDesc, document.getElementById("sym-itemdesc"));
         itemName.value = matchedItem.name;
         itemDesc.value = matchedItem.description;
+        itemName.readOnly = true;
+        itemDesc.readOnly = true;
     }
     else {
         disabledField(itemName, document.getElementById("sym-itemname"));
         disabledField(itemDesc, document.getElementById("sym-itemdesc"));
+        itemName.readOnly = false;
+        itemDesc.readOnly = false;
     }
 });
 
