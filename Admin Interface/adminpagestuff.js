@@ -219,6 +219,9 @@ document.getElementById('editBtn').addEventListener('click', () => {
 document.getElementById('saveEditBtn').addEventListener('click', async () => {
     const isItem = currentSection === 'items';
     const activeData = isItem ? items : tickets;
+    const BASE_URL = 'http://localhost:5000';
+
+
     
     const entryIndex = activeData.findIndex(e => (e._id || e.id) === currentlyViewingId);
     if (entryIndex === -1) {
@@ -235,7 +238,7 @@ document.getElementById('saveEditBtn').addEventListener('click', async () => {
     }
 
     try {
-        const response = await fetch(`${isItem ? '/api/inventory' : '/api/tickets'}/${currentlyViewingId}`, {
+        const response = await fetch(`${BASE_URL}${isItem ? '/api/inventory' : '/api/tickets'}/${currentlyViewingId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatedFields)
@@ -258,6 +261,8 @@ document.getElementById('saveEditBtn').addEventListener('click', async () => {
 // Pressing "Delete Item"
 document.getElementById('deleteBtn').addEventListener('click', async () => {
     console.log("DEBUG: Clicked delete. currentlyViewingId is:", currentlyViewingId);
+    const BASE_URL = 'http://localhost:5000';
+    
 
     if (!currentlyViewingId) {
         alert("Error: No ID found to delete!");
@@ -274,7 +279,7 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
 
             console.log("DEBUG: Sending DELETE fetch to:", endpoint);
 
-            const response = await fetch(endpoint, {
+            const response = await fetch(`${BASE_URL}/api/inventory/${currentlyViewingId}`, {
                 method: 'DELETE'
             });
 
