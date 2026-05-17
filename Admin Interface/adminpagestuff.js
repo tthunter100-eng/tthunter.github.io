@@ -257,21 +257,28 @@ document.getElementById('saveEditBtn').addEventListener('click', async () => {
 
 // Pressing "Delete Item"
 document.getElementById('deleteBtn').addEventListener('click', async () => {
+    console.log("DEBUG: Clicked delete. currentlyViewingId is:", currentlyViewingId);
+
+    if (!currentlyViewingId) {
+        alert("Error: No ID found to delete!");
+        return;
+    }
+
     if (confirm("Are you sure you want to delete this permanently?")) {
         const isItem = currentSection === 'items';
-        console.log("Deleting ID:", currentlyViewingId);
         
         try {
             const endpoint = isItem 
                 ? `/api/inventory/${currentlyViewingId}` 
                 : `/api/tickets/${currentlyViewingId}`;
 
+            console.log("DEBUG: Sending DELETE fetch to:", endpoint);
+
             const response = await fetch(endpoint, {
                 method: 'DELETE'
             });
 
             if (response.ok) {
-                // Update local data only after server confirms
                 if (isItem) {
                     items = items.filter(i => (i._id || i.id) !== currentlyViewingId);
                 } else {
@@ -279,9 +286,11 @@ document.getElementById('deleteBtn').addEventListener('click', async () => {
                 }
 
                 sidebar.style.display = 'none';
-                renderList(); // Use renderList since it handles both sections
+                renderList(); 
                 alert("Deleted successfully!");
             } else {
+                const errText = await response.text();
+                console.error("Server rejected delete:", errText);
                 alert("Failed to delete from server.");
             }
         } catch (err) {
