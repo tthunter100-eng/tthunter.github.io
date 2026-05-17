@@ -80,67 +80,16 @@ statusSelect.addEventListener('change', function() {
 
 // --- Search & Filter Logic ---
 
-searchBar.addEventListener('input', renderItems);
+searchBar.addEventListener('input', renderList);
 
 filterBlocks.forEach(block => {
     block.addEventListener('click', function() {
         filterBlocks.forEach(b => b.classList.remove('selected'));
         this.classList.add('selected');
         currentFilter = this.getAttribute('data-filter');
-        renderItems();
+        renderList();
     });
 });
-
-// --- Rendering Logic ---
-
-function renderItems() {
-    const searchText = searchBar.value.toLowerCase();
-    
-    const filteredItems = items.filter(item => {
-        const matchesFilter = currentFilter === 'all' || item.status === currentFilter;
-        const matchesSearch = item.code?.toLowerCase().includes(searchText) || 
-                              item.name?.toLowerCase().includes(searchText);
-        return matchesFilter && matchesSearch;
-    });
-
-    searchUnderlay.innerHTML = '';
-
-    filteredItems.forEach(item => {
-    const itemEl = document.createElement('div');
-    itemEl.className = 'list-item-entry';
-    itemEl.style.cursor = 'pointer'; // Make it look clickable
-    itemEl.addEventListener('click', () => viewItem(item.id));
-    
-    // --- Close button and "Add" button logic ---
-document.getElementById('closeViewBtn').addEventListener('click', () => {
-    sidebar.style.display = 'none';
-});
-
-searchAdd.addEventListener('click', () => {
-    // Ensure form is shown and view is hidden when clicking "+"
-    document.getElementById('itemView').style.display = 'none';
-    document.getElementById('itemForm').style.display = 'block';
-    sidebar.style.display = 'block';
-});
-        
-        // Map status to colors
-        let statusColor = '#f1c40f'; // Yellow (Unclaimed)
-        if (item.status === 'claimed') statusColor = '#27ae60'; // Green
-        if (item.status === 'archived') statusColor = '#e74c3c'; // Red
-
-        // Create the HTML with both the dot and the text
-        itemEl.innerHTML = `
-            <span class="item-code">${item.code}</span>
-            <span class="item-name">${item.name}</span>
-            <div class="status-container">
-                <span class="status-text" style="color: ${statusColor}">${item.status.toUpperCase()}</span>
-                <span class="status-indicator" style="background: ${statusColor}"></span>
-            </div>
-        `;
-        
-        searchUnderlay.appendChild(itemEl);
-    });
-}
 
 function viewItem(mongoId) {
     const activeData = currentSection === 'items' ? items : tickets;
