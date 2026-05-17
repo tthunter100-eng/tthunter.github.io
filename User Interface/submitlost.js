@@ -172,7 +172,7 @@ function renderInventory() {
         li.dataset.code = item.code;
         li.dataset.name = item.name;
         li.dataset.category = item.category;
-        li.dataset.desc = item.desc;
+        li.dataset.desc = item.description;
 
         Object.assign(li.style, {
             padding: "5px 5px",
@@ -190,7 +190,7 @@ function renderInventory() {
                 </div>
             </div>
             <div style="height: 50px; font-size: 16px; color: #b0b0b0; line-height: 1.4; text-align: center; padding: 3px; width: 100%;">
-                ${item.desc || "No additional details"}
+                ${item.description || "No additional details"}
             </div>
         `;
 
