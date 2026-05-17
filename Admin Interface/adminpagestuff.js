@@ -373,7 +373,7 @@ function renderList() {
     const itemEl = document.createElement('div');
     itemEl.className = 'list-item-entry';
     itemEl.style.cursor = 'pointer';
-    itemEl.addEventListener('click', () => viewItem(entry._id.toString()));
+    itemEl.addEventListener('click', () => viewItem(entry._id));
 
 
     const colors = {
