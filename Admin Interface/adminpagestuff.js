@@ -147,7 +147,7 @@ function viewItem(mongoId) {
     const entry = activeData.find(e => (e._id === mongoId || e.id === mongoId));
     if (!entry) return;
 
-    currentlyViewingId = mongoId;
+    currentlyViewingId = mongoId.toString();
     document.getElementById('itemForm').style.display = 'none';
     document.getElementById('itemView').style.display = 'block';
     sidebar.style.display = 'block';
@@ -424,7 +424,8 @@ function renderList() {
     const itemEl = document.createElement('div');
     itemEl.className = 'list-item-entry';
     itemEl.style.cursor = 'pointer';
-    itemEl.addEventListener('click', () => viewItem(entry._id));
+    itemEl.addEventListener('click', () => viewItem(entry._id.toString()));
+
 
     const colors = {
       claimed: '#27ae60', approved: '#27ae60',
