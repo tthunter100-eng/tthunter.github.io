@@ -120,6 +120,17 @@ function viewItem(mongoId) {
   document.getElementById('viewProgram').textContent = entry.program;
   document.getElementById('viewDepartment').textContent = entry.department;
   document.getElementById('viewEmail').textContent = entry.email;
+
+  //display image
+  const idImgContainer = document.getElementById('viewIdImage');
+    if (idImgContainer) {
+        if (entry.idImage) {
+            idImgContainer.src = entry.idImage;
+            idImgContainer.style.display = 'block';
+        } else {
+            idImgContainer.style.display = 'none';
+        }
+    }
 } else {
   // Hide ticket view
   document.getElementById('ticketView').style.display = 'none';
@@ -150,6 +161,17 @@ function viewItem(mongoId) {
   document.getElementById('viewClaimedBy').textContent = entry.claimedBy || 'N/A';
   document.getElementById('viewDateClaimed').textContent = entry.dateClaimed || 'N/A';
 
+  //display image
+  const itemImgContainer = document.getElementById('viewItemImage');
+    if (itemImgContainer) {
+        if (entry.itemImage) {
+            itemImgContainer.src = entry.itemImage;
+            itemImgContainer.style.display = 'block';
+        } else {
+            itemImgContainer.style.display = 'none'; // hide if no image attached
+        }
+    }
+        
   // Status badge color
   const badge = document.getElementById('viewStatusBadge');
   badge.textContent = entry.status.toUpperCase();
